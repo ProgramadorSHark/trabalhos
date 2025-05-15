@@ -1,0 +1,529 @@
+/* Variáveis CSS Globais */
+:root {
+    --cor-fundo-principal: #121212;
+    --cor-fundo-secundaria: #1c1c1c;
+    --cor-fundo-card: #252525;
+    --cor-fundo-card-hover: #333;
+    --cor-destaque: #ff6700;
+    --cor-destaque-hover: #e55d00;
+    --cor-texto-principal: #fff;
+    --cor-texto-secundario: #eee;
+    --cor-texto-discreto: #ccc;
+    --cor-input-fundo: #444;
+    --cor-input-borda: #555;
+    --cor-whatsapp: #25d366;
+    --cor-whatsapp-hover: #128c7e;
+    --cor-sucesso: #28a745;
+    --cor-erro: #dc3545;
+
+    --fonte-principal: 'Inter', sans-serif;
+    --espacamento-base: 20px; /* Base para paddings e margins */
+}
+
+/* Reset e Padrões Globais */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--fonte-principal);
+    background-color: var(--cor-fundo-principal);
+    color: var(--cor-texto-principal);
+    line-height: 1.7;
+}
+
+.container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--espacamento-base);
+    padding-right: var(--espacamento-base);
+}
+
+/* Estilos de Foco Visíveis para Acessibilidade */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible { /* Usando :focus-visible para melhor UX */
+    outline: 2px solid var(--cor-destaque);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 4px rgba(255, 103, 0, 0.3); /* Opcional: anel de foco mais suave */
+}
+/*Inputs já tem um foco customizado, mas :focus-visible garante consistência*/
+.form-group input:focus-visible,
+.form-group textarea:focus-visible {
+    border-color: var(--cor-destaque); /* Mantém o estilo de borda no foco */
+    outline: none; /* Remove o outline duplicado se já tem borda */
+    box-shadow: 0 0 0 3px rgba(255, 103, 0, 0.2); /* Adiciona um brilho sutil */
+}
+
+
+/* Cabeçalho */
+header {
+    background-color: var(--cor-fundo-secundaria);
+    padding: var(--espacamento-base) 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo a {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--cor-destaque);
+    text-decoration: none;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+}
+
+header nav ul li {
+    margin-left: var(--espacamento-base);
+}
+
+header nav ul li a {
+    color: var(--cor-texto-secundario);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    padding: 5px 0; /* Adiciona área de clique e para outline */
+}
+
+header nav ul li a:hover,
+header nav ul li a:focus { /* :focus para consistência com :focus-visible */
+    color: var(--cor-destaque);
+}
+
+header .contato-rapido a {
+    color: var(--cor-texto-principal);
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border: 2px solid var(--cor-destaque);
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+header .contato-rapido a:hover,
+header .contato-rapido a:focus {
+    background-color: var(--cor-destaque);
+    color: var(--cor-texto-principal);
+}
+
+/* Seções Genéricas */
+section {
+    padding: calc(var(--espacamento-base) * 4) 0; /* 80px */
+}
+
+/* Hero Section */
+.hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(https://images.unsplash.com/photo-1588070128212-43e597c39c65?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+    background-size: cover;
+    background-position: center;
+    color: var(--cor-texto-principal);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh; /* Garante uma boa altura mínima */
+}
+
+.hero-content {
+    max-width: 800px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: var(--espacamento-base);
+    color: var(--cor-destaque);
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: calc(var(--espacamento-base) * 1.5); /* 30px */
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: var(--cor-destaque);
+    color: var(--cor-texto-principal);
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.cta-button:hover,
+.cta-button:focus {
+    background-color: var(--cor-destaque-hover);
+}
+
+/* Seção Serviços */
+.servicos {
+    background-color: var(--cor-fundo-secundaria);
+    text-align: center;
+}
+
+.servicos h2 {
+    font-size: 36px;
+    margin-bottom: calc(var(--espacamento-base) * 3); /* 60px */
+    color: var(--cor-destaque);
+}
+
+.servicos-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: calc(var(--espacamento-base) * 2); /* 40px */
+    margin-top: var(--espacamento-base);
+}
+
+.servico {
+    background-color: var(--cor-fundo-card);
+    padding: calc(var(--espacamento-base) * 1.5); /* 30px */
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.servico:hover {
+    background-color: var(--cor-fundo-card-hover);
+    transform: translateY(-10px);
+}
+
+.servico i {
+    font-size: 40px;
+    margin-bottom: var(--espacamento-base);
+    color: var(--cor-destaque);
+}
+
+.servico h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: var(--cor-texto-secundario);
+}
+
+.servico p {
+    color: var(--cor-texto-discreto);
+}
+
+/* Seção Depoimentos */
+.depoimentos {
+    background-color: var(--cor-fundo-card); /* Usando cor de card para seção */
+}
+
+.depoimentos h2 {
+    font-size: 36px;
+    margin-bottom: calc(var(--espacamento-base) * 3); /* 60px */
+    text-align: center;
+    color: var(--cor-destaque);
+}
+
+.depoimentos-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: calc(var(--espacamento-base) * 1.5); /* 30px */
+    margin-top: var(--espacamento-base);
+}
+
+.depoimento {
+    background-color: var(--cor-fundo-card-hover); /* Um pouco mais escuro que o fundo da seção */
+    padding: calc(var(--espacamento-base) * 1.5); /* 30px */
+    border-radius: 5px;
+    color: var(--cor-texto-secundario);
+}
+.depoimento blockquote p {
+    margin-bottom: var(--espacamento-base);
+    color: var(--cor-texto-discreto);
+    font-style: italic;
+}
+
+.depoimento cite {
+    display: block; /* Para que o text-align funcione */
+    text-align: right;
+    font-weight: 600;
+    color: var(--cor-destaque);
+    font-style: normal;
+}
+
+
+/* Seção Fotos */
+.fotos {
+    background-color: var(--cor-fundo-secundaria);
+    text-align: center;
+}
+
+.fotos h2 {
+    font-size: 36px;
+    margin-bottom: calc(var(--espacamento-base) * 3); /* 60px */
+    color: var(--cor-destaque);
+}
+
+.galeria-fotos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--espacamento-base);
+    margin-top: var(--espacamento-base);
+}
+
+.foto-item {
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.foto-item:hover {
+    transform: translateY(-10px) scale(1.05);
+}
+
+.foto-item img {
+    width: 100%;
+    height: 100%; /* Garante que a imagem preencha o contêiner do item */
+    object-fit: cover; /* Preenche o espaço sem distorcer */
+    display: block; /* Remove espaço extra abaixo da imagem */
+}
+
+/* Seção Contato */
+.contato {
+    background-color: var(--cor-fundo-card);
+}
+
+.contato h2 {
+    font-size: 36px;
+    margin-bottom: calc(var(--espacamento-base) * 3); /* 60px */
+    text-align: center;
+    color: var(--cor-destaque);
+}
+
+.contato-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: calc(var(--espacamento-base) * 3); /* 60px */
+    margin-top: var(--espacamento-base);
+}
+
+.formulario-contato,
+.info-detalhada {
+    background-color: var(--cor-fundo-card-hover);
+    padding: calc(var(--espacamento-base) * 2); /* 40px */
+    border-radius: 5px;
+}
+
+.formulario-contato h3,
+.info-detalhada h3 {
+    font-size: 24px;
+    margin-bottom: calc(var(--espacamento-base) * 1.5); /* 30px */
+    color: var(--cor-texto-secundario);
+}
+.info-detalhada h3 {
+    color: var(--cor-destaque);
+}
+
+.form-group {
+    margin-bottom: var(--espacamento-base);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--cor-texto-discreto);
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--cor-input-borda);
+    border-radius: 5px;
+    background-color: var(--cor-input-fundo);
+    color: var(--cor-texto-secundario);
+    font-family: var(--fonte-principal);
+    transition: border-color 0.3s ease;
+}
+/* Não precisa de :focus aqui se :focus-visible está tratando */
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 12px 24px;
+    background-color: var(--cor-destaque);
+    color: var(--cor-texto-principal);
+    border: none;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover,
+.submit-button:focus {
+    background-color: var(--cor-destaque-hover);
+}
+
+.info-detalhada p {
+    margin-bottom: var(--espacamento-base);
+    color: var(--cor-texto-discreto);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.info-detalhada i {
+    color: var(--cor-destaque);
+    font-size: 20px;
+    width: 20px; /* Para alinhar melhor os ícones */
+    text-align: center;
+}
+
+.mensagem-status {
+    margin-top: var(--espacamento-base);
+    padding: var(--espacamento-base);
+    border-radius: 5px;
+    display: none; /* Inicialmente escondido */
+    font-weight: 500;
+}
+.mensagem-status.sucesso {
+    background-color: var(--cor-sucesso);
+    color: var(--cor-texto-principal);
+}
+.mensagem-status.erro {
+    background-color: var(--cor-erro);
+    color: var(--cor-texto-principal);
+}
+
+
+/* Rodapé */
+footer {
+    background-color: var(--cor-fundo-secundaria);
+    padding: calc(var(--espacamento-base) * 1.5) 0; /* 30px */
+    text-align: center;
+    color: #ddd; /* Cor específica do footer, pode ser var(--cor-texto-discreto) */
+}
+
+/* Botão Flutuante WhatsApp */
+.whatsapp-button {
+    position: fixed;
+    bottom: var(--espacamento-base);
+    right: var(--espacamento-base);
+    z-index: 1000;
+}
+
+.whatsapp-button a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--cor-whatsapp);
+    color: var(--cor-texto-principal);
+    padding: 12px 20px;
+    border-radius: 50px;
+    font-size: 18px;
+    text-decoration: none;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+}
+
+.whatsapp-button a:hover,
+.whatsapp-button a:focus {
+    background-color: var(--cor-whatsapp-hover);
+}
+
+.whatsapp-button i {
+    font-size: 24px;
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    header nav {
+        margin-top: var(--espacamento-base); /* Espaço entre logo e nav */
+    }
+
+    header nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header nav ul li {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+    header .contato-rapido {
+        margin-top: var(--espacamento-base); /* Espaço após a navegação */
+    }
+
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .servicos-lista,
+    .depoimentos-lista,
+    .galeria-fotos,
+    .contato-info {
+        grid-template-columns: 1fr; /* Garante uma coluna */
+    }
+    /* .contato-info já é grid, flex-direction: column; não é necessário aqui */
+
+    .formulario-contato,
+    .info-detalhada {
+        /* width: 100%; Não é necessário com box-sizing e grid 1fr */
+        margin-bottom: calc(var(--espacamento-base) * 1.5); /* 30px */
+    }
+    .info-detalhada {
+        margin-bottom: 0; /* O último não precisa de margem */
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 28px;
+    }
+    .hero p {
+        font-size: 15px;
+    }
+    .cta-button, .submit-button {
+        font-size: 18px;
+        padding: 10px 20px;
+    }
+    .servicos h2, .depoimentos h2, .fotos h2, .contato h2 {
+        font-size: 28px;
+        margin-bottom: calc(var(--espacamento-base) * 2);
+    }
+    .servico h3, .formulario-contato h3, .info-detalhada h3 {
+        font-size: 20px;
+    }
+}
