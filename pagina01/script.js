@@ -34,7 +34,7 @@
             // Validações
             if (!nome.value.trim()) {
                 erros.push('O campo Nome é obrigatório.');
-                if (!erros.length || erros.length === 1) nome.focus(); // Foca se for o primeiro erro
+                if (!erros.length || erros.length === 1) nome.focus();
             }
             if (!email.value.trim()) {
                 erros.push('O campo E-mail é obrigatório.');
@@ -53,49 +53,46 @@
             }
 
             if (erros.length > 0) {
-                mensagemStatus.textContent = erros.join(' \n'); // Junta erros com nova linha para melhor leitura
+                mensagemStatus.textContent = erros.join(' \n');
                 mensagemStatus.classList.add('erro');
                 mensagemStatus.style.display = 'block';
             } else {
-                // Enviar formulário via AJAX
                 const submitButton = form.querySelector('button[type="submit"]');
                 submitButton.disabled = true;
                 submitButton.textContent = 'Enviando...';
 
-                fetch(form.action, { // Usa o action do form (seu endpoint Formspree)
+                fetch(form.action, {
                     method: 'POST',
                     body: new FormData(form),
-                    headers: { // CORREÇÃO: Adicionado cabeçalho Accept para Formspree
+                    headers: {
                         'Accept': 'application/json'
                     }
                 })
                 .then(response => {
-                    if (response.ok) { // Status 2xx indica sucesso para Formspree com AJAX
-                        return response.json(); // CORREÇÃO: Processa a resposta JSON
+                    if (response.ok) {
+                        return response.json();
                     } else {
-                        // Se o Formspree retornar um erro, ele geralmente vem em JSON também
-                        return response.json().then(data => { // CORREÇÃO: Processa o erro JSON
+                        return response.json().then(data => {
                             let errorMessage = `Falha no envio. Status: ${response.status}`;
                             if (data && data.errors && data.errors.length > 0) {
-                                // Formspree pode retornar um array de erros
-                                errorMessage = data.errors.map(err => err.message || err.field || err.error || 'Erro desconhecido no campo').join(', ');
-                            } else if (data && data.error) { // Se Formspree mandar um único erro
+                                errorMessage = data.errors.map(err => err.message || err.field || err.error || 'Erro desconhecido').join(', ');
+                            } else if (data && data.error) {
                                 errorMessage = data.error;
                             }
                             throw new Error(errorMessage);
                         });
                     }
                 })
-                .then(data => { // 'data' é o objeto JSON de sucesso do Formspree
+                .then(data => {
                     mensagemStatus.textContent = 'Mensagem enviada com sucesso! Entraremos em contato em breve.';
-                    mensagemStatus.classList.remove('erro'); // Garante que não tenha a classe erro
+                    mensagemStatus.classList.remove('erro');
                     mensagemStatus.classList.add('sucesso');
                     mensagemStatus.style.display = 'block';
-                    form.reset(); // Limpa o formulário
+                    form.reset();
                 })
-                .catch(error => { // Erro de rede ou erro retornado pelo Formspree
-                    mensagemStatus.textContent = `Erro ao enviar a mensagem: ${error.message}. Por favor, tente novamente ou contate-nos por telefone.`;
-                    mensagemStatus.classList.remove('sucesso'); // Garante que não tenha a classe sucesso
+                .catch(error => {
+                    mensagemStatus.textContent = `Erro ao enviar a mensagem: ${error.message}. Por favor, tente novamente.`;
+                    mensagemStatus.classList.remove('sucesso');
                     mensagemStatus.classList.add('erro');
                     mensagemStatus.style.display = 'block';
                 })
@@ -114,30 +111,21 @@
 
     /**
      * Rolagem Suave (Smooth Scrolling)
-     * --------------------------------
      */
     function adicionarRolagemSuave() {
         const linksMenu = document.querySelectorAll('header nav ul li a[href^="#"]');
-
         linksMenu.forEach(link => {
             link.addEventListener('click', function(event) {
                 const href = this.getAttribute('href');
-
-                if (href === '#') { // Link "Início" ou similar para o topo
+                if (href === '#') {
                     event.preventDefault();
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 } else {
                     const alvoId = href.slice(1);
                     const alvoElemento = document.getElementById(alvoId);
-
                     if (alvoElemento) {
                         event.preventDefault();
-                        alvoElemento.scrollIntoView({
-                            behavior: 'smooth'
-                        });
+                        alvoElemento.scrollIntoView({ behavior: 'smooth' });
                     }
                 }
             });
@@ -146,7 +134,6 @@
 
     /**
      * Atualização Dinâmica do Ano no Rodapé
-     * --------------------------------------
      */
     function atualizarAnoRodape() {
         const spanAno = document.getElementById('ano-atual-rodape');
@@ -157,7 +144,6 @@
 
     /**
      * Inicialização
-     * -------------
      */
     document.addEventListener('DOMContentLoaded', function() {
         configurarFormularioContato();
@@ -166,22 +152,25 @@
 
         // Lógica para o menu mobile (hamburger)
         const mobileMenuButton = document.getElementById('mobile-menu-toggle');
-        const navMenu = document.querySelector('header nav ul');
+        // CORREÇÃO APLICADA: Seleciona a tag <nav> diretamente para aplicar a classe 'active'
+        const navMenu = document.getElementById('main-navigation'); // Usa o ID da <nav>
 
-        // CORREÇÃO: Verifica se os elementos existem antes de adicionar o listener
         if (mobileMenuButton && navMenu) {
             mobileMenuButton.addEventListener('click', () => {
-                navMenu.classList.toggle('active');
-                // Opcional: Atualizar aria-expanded para acessibilidade
+                navMenu.classList.toggle('active'); // Alterna a classe 'active' na TAG NAV
+                
+                // Adiciona/remove classe no header para controlar ícones do botão via CSS
+                // Isso é útil se você quiser que o CSS mude os ícones com base em .header.menu-active
+                const header = document.querySelector('header');
                 const isExpanded = navMenu.classList.contains('active');
+                
+                if(header) { // Verifica se o header foi encontrado
+                    header.classList.toggle('menu-active', isExpanded);
+                }
+                
                 mobileMenuButton.setAttribute('aria-expanded', isExpanded);
             });
         }
     });
 
 })();
-/**
- * script.js - Fim
- *
- * Este arquivo contém os scripts JavaScript para o site de assistência técnica de computadores.
- */

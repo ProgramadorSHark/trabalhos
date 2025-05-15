@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assistência Técnica de Computadores - PcdRc</title> <link rel="preconnect" href="https://fonts.googleapis.com">
+    <title>Assistência Técnica de Computadores - PcdRc</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -15,7 +16,11 @@
             <div class="logo">
                 <a href="#">PcdRc</a>
             </div>
-            <nav>
+
+            <button id="mobile-menu-toggle" class="mobile-menu-button" aria-label="Abrir menu" aria-expanded="false" aria-controls="main-navigation">
+                <i class="fas fa-bars" aria-hidden="true"></i> <i class="fas fa-times" aria-hidden="true"></i> </button>
+
+            <nav id="main-navigation"> 
                 <ul>
                     <li><a href="#">Início</a></li>
                     <li><a href="#servicos">Serviços</a></li>
@@ -30,7 +35,7 @@
         </div>
     </header>
 
-    <main> 
+    <main>
         <section id="hero" class="hero">
             <div class="container">
                 <div class="hero-content">
@@ -79,7 +84,6 @@
                 <h2>O Que Nossos Clientes Dizem</h2>
                 <div class="depoimentos-lista">
                     <div class="depoimento">
-                        
                         <blockquote>
                             <p>"Serviço excelente! Meu computador estava muito lento e agora está rodando perfeitamente. Recomendo!"</p>
                         </blockquote>

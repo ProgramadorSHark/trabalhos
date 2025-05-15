@@ -527,3 +527,93 @@ footer {
         font-size: 20px;
     }
 }
+/* Estilos para o Botão Hamburger e Menu Mobile */
+
+.mobile-menu-button {
+    display: none; /* Inicialmente escondido em telas maiores */
+    background: none;
+    border: none;
+    color: var(--cor-texto-secundario); /* Ou var(--cor-destaque) */
+    font-size: 24px; /* Tamanho do ícone */
+    cursor: pointer;
+    padding: 10px;
+    z-index: 105; /* Para ficar acima de outros elementos do header se necessário */
+}
+
+.mobile-menu-button .fa-times {
+    display: none; /* Ícone de fechar escondido por padrão */
+}
+
+/* Quando o menu está ativo (classe 'menu-active' no header ou 'active' no botão) */
+/* Ajuste conforme a lógica do seu JS se ele adicionar classe ao header ou ao botão */
+header.menu-active .mobile-menu-button .fa-bars {
+    display: none; /* Esconde o ícone de hamburger */
+}
+
+header.menu-active .mobile-menu-button .fa-times {
+    display: inline; /* Mostra o ícone de fechar */
+}
+
+
+/* Ajustes no Header para Mobile e Tablet */
+@media (max-width: 768px) {
+    header .container {
+        /* Ajuste para o botão hamburger. Pode precisar de flex-wrap ou reordenar com order. */
+        /* Exemplo: fazer o logo e o botão ficarem na mesma linha e a nav abaixo */
+    }
+
+    .mobile-menu-button {
+        display: block; /* Mostra o botão em telas menores */
+        /* Posicione o botão. Ex: order: -1; para vir antes da nav no flex-direction: column */
+    }
+
+    header nav {
+        /* Esconder o menu por padrão em telas menores */
+        display: none; /* Esconde o menu de navegação inicialmente */
+        width: 100%; /* Ocupa toda a largura */
+        background-color: var(--cor-fundo-secundaria); /* Mesmo fundo do header ou um pouco diferente */
+        position: absolute; /* Ou relative, dependendo do efeito desejado */
+        top: 100%; /* Posiciona abaixo do header. Ajuste se o header tiver altura fixa. */
+        left: 0;
+        padding: var(--espacamento-base) 0;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    header nav.active { /* Classe 'active' será adicionada pelo JavaScript */
+        display: flex; /* Ou block, dependendo de como quer alinhar os itens */
+        flex-direction: column;
+        align-items: center; /* Centraliza os itens do menu */
+    }
+
+    header nav ul {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    header nav ul li {
+        margin-left: 0;
+        margin-top: 0; /* Removido o margin-top padrão da media query anterior */
+        width: 100%;
+        text-align: center;
+    }
+
+    header nav ul li a {
+        display: block; /* Faz o link ocupar toda a largura do <li> */
+        padding: 15px var(--espacamento-base); /* Aumenta a área de toque */
+        border-bottom: 1px solid rgba(255,255,255,0.1); /* Linha separadora sutil */
+    }
+    header nav ul li:last-child a {
+        border-bottom: none; /* Remove a borda do último item */
+    }
+
+    /* Esconder o contato rápido no header mobile se o menu estiver visível, ou reposicionar */
+    /* Se o contato rápido estiver dentro da nav que é escondida, ele já some. */
+    /* Se estiver fora, você pode querer escondê-lo ou movê-lo para dentro do menu que abre */
+    header .contato-rapido {
+        /* display: none;  OU ajuste o layout */
+        /* Se quiser que ele apareça no menu mobile, mova o HTML dele para dentro da <nav> */
+        /* e estilize aqui */
+        margin-top: var(--espacamento-base); /* Se mantiver separado e abaixo da nav */
+    }
+}
