@@ -557,10 +557,7 @@ header.menu-active .mobile-menu-button .fa-times {
 
 /* Ajustes no Header para Mobile e Tablet */
 @media (max-width: 768px) {
-    header .container {
-        /* Ajuste para o botão hamburger. Pode precisar de flex-wrap ou reordenar com order. */
-        /* Exemplo: fazer o logo e o botão ficarem na mesma linha e a nav abaixo */
-    }
+    
 
     .mobile-menu-button {
         display: block; /* Mostra o botão em telas menores */
